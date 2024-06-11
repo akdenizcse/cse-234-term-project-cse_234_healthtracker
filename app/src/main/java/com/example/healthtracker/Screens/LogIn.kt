@@ -1,4 +1,4 @@
-package com.example.healthtracker
+package com.example.healthtracker.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -26,25 +25,29 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.healthtracker.ui.theme.Purple40
-import com.example.healthtracker.ui.theme.Purple80
+import androidx.navigation.NavHostController
+import com.example.healthtracker.R
 import com.example.healthtracker.ui.theme.RoyalPurple
-import org.w3c.dom.Text
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @Composable
-@Preview(showBackground = true)
-fun SignIn() {
+fun LogIn(navController: NavHostController) {
+    val auth = Firebase.auth
+
     var emailState by remember {
+        mutableStateOf("")
+    }
+
+    var passwordState by remember {
         mutableStateOf("")
     }
 
@@ -91,7 +94,7 @@ fun SignIn() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Create an account",
+                    text = "Log in to your account",
                     fontSize = 25.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
@@ -100,7 +103,7 @@ fun SignIn() {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "Enter your email to sign up",
+                    text = "Enter your email and password to log in",
                     fontSize = 17.sp,
                     color = Color.White
                 )
@@ -119,8 +122,41 @@ fun SignIn() {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
 
+                TextField(
+                    value = passwordState,
+                    onValueChange = {
+                        passwordState = it
+                    },
+                    label = {
+                        Text(text = "Password")
+                    },
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    visualTransformation = PasswordVisualTransformation()
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                var invalidCredentail by remember {
+                    mutableStateOf("")
+                }
+
+                Text(text = invalidCredentail, color = Color.Cyan, modifier = Modifier.padding(start = 0.dp))
+
+                Spacer(modifier = Modifier.height(10.dp))
+
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        auth.signInWithEmailAndPassword(emailState, passwordState)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    navController.navigate("home_screen")
+                                } else {
+                                    invalidCredentail = "Invalid Email or Password"
+                                }
+
+                            }
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
@@ -130,12 +166,23 @@ fun SignIn() {
 
                     )
                 {
-                    Text(text = "Sign up with email")
+                    Text(text = "Log in")
                 }
 
                 Spacer(modifier = Modifier.height(15.dp))
 
-                Text(text = "or continue with", color = Color.White)
+                Row {
+                    Text(text = "or continue with", color = Color.White)
+
+                    Spacer(modifier = Modifier.width(60.dp))
+
+                    Text(
+                        text = "Sign Up",
+                        color = Color.Cyan,
+                        modifier = Modifier.clickable {
+                            navController.navigate("sign_up")
+                        })
+                }
 
                 Spacer(modifier = Modifier.height(15.dp))
 
