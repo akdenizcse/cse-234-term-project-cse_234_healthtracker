@@ -1,0 +1,265 @@
+@Composable
+fun Profile() {
+    var selectedDate by remember { mutableStateOf(getDate(0)) }
+    val calories = getCaloriesForDate(selectedDate)
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(RoyalPurple)
+            .padding(50.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { /*TODO*/ }
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.img),
+                    contentDescription = "close",
+                    modifier = Modifier
+                )
+            }
+            
+            Spacer(modifier = Modifier.width(45.dp))
+
+            Text(
+                text = "Your Profile",
+                color = Color.White,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+            Spacer(modifier = Modifier.width(45.dp))
+
+            IconButton(
+                onClick = { /*TODO*/ }
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.img_2),
+                    contentDescription = "close",
+                    modifier = Modifier
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "profilePic",
+            modifier = Modifier
+                .clip(CircleShape)
+                .size(128.dp)
+        )
+        
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(text = "Berke Demir", fontSize = 24.sp, color = Color.White, fontWeight = FontWeight.Bold)
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.flame),
+            contentDescription = "flame",
+            modifier = Modifier
+                .clip(CircleShape)
+                .size(24.dp)
+        )
+        
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(text = "333", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
+
+        Spacer(modifier = Modifier.height(2.dp))
+
+        Text(text = "Total Calories", fontSize = 12.sp, color = Color.LightGray)
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.timelineheadp),
+            contentDescription = "timeline",
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(36.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            for (i in 1..5) {
+                val buttonText = if (i == 3) "${getDate(i-3)}, Tdy" else getDate(i - 3)
+                val textColor = if (i == 3) Color.White else Color.White.copy(alpha = 0.5f)
+
+                TextButton(
+                    onClick = { selectedDate = getDate(-i) },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 4.dp),
+                    colors = ButtonDefaults.textButtonColors(contentColor = Color.Black),
+                ) {
+                    Text(
+                        text = buttonText,
+                        color = textColor,
+                        fontSize = 16.sp
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(76.dp)
+                .border(2.dp, Color.White.copy(alpha = 0.3f), shape = RoundedCornerShape(48.dp))
+
+        )
+        {
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.running),
+                    contentDescription = "running",
+                    modifier = Modifier.clip(CircleShape)
+                )
+                
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Column()
+                {
+                    Text(text = "Running", fontSize = 18.sp, color = Color.White)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = "24 min", fontSize = 14.sp, color = Color.White)
+                }
+                Spacer(modifier = Modifier.width(56.dp))
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.End
+                )
+                {
+                    Text(text = "5.56 km", fontSize = 18.sp, color = Color.White)
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Row(
+                        modifier = Modifier,
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Image(
+                            painter = painterResource(id = R.drawable.flame),
+                            contentDescription = "flame",
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(16.dp)
+                        )
+                        Text(text = "300 kcal", fontSize = 14.sp, color = Color.White)
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(76.dp)
+                .border(2.dp, Color.White.copy(alpha = 0.3f), shape = RoundedCornerShape(48.dp))
+        )
+        {
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.cycling),
+                    contentDescription = "Cycling",
+                    modifier = Modifier.clip(CircleShape)
+                )
+                
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Column()
+                {
+                    Text(text = "Cycling", fontSize = 18.sp, color = Color.White)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = "12 min", fontSize = 14.sp, color = Color.White)
+                }
+                
+                Spacer(modifier = Modifier.width(56.dp))
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.End
+                )
+                {
+                    Text(text = "5.56 km", fontSize = 18.sp, color = Color.White)
+                    
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Row(
+                        modifier = Modifier,
+                        verticalAlignment = Alignment.CenterVertically
+                    )
+                    {
+                        Image(
+                            painter = painterResource(id = R.drawable.flame),
+                            contentDescription = "flame",
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(16.dp)
+                        )
+                        Text(text = "300 kcal", fontSize = 14.sp, color = Color.White)
+                    }
+                }
+            }
+        }
+        
+        Text(
+            text = "Calories: $calories",
+            fontSize = 18.sp,
+            color = Color.White,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+fun getDate(offset: Int): String {
+    val calendar = Calendar.getInstance()
+    calendar.add(Calendar.DAY_OF_YEAR, offset)
+    val format = SimpleDateFormat("dd", Locale.getDefault())
+    return format.format(calendar.time)
+}
+
+fun getCaloriesForDate(date: String): Int {
+    return when (date) {
+        getDate(-2) -> 420
+        getDate(-1) -> 300
+        getDate(0) -> 500
+        getDate(1) -> 320
+        getDate(2) -> 450
+        else -> 0
+    }
+}
