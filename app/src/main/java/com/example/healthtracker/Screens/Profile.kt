@@ -37,6 +37,7 @@ import java.util.Locale
 @Composable
 fun Profile() {
     var selectedDate by remember { mutableStateOf(getDate(0)) }
+    val totalCaloriesToday = getCaloriesForDate(getDate(0))
     val calories = getCaloriesForDate(selectedDate)
     val kilometers = getKmForDate(selectedDate)
     val minutes = getMinForDate(selectedDate)
@@ -115,7 +116,7 @@ fun Profile() {
 
         Spacer(modifier = Modifier.height(3.dp))
 
-        Text(text = "333", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
+        Text(text = "$totalCaloriesToday", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
 
         Spacer(modifier = Modifier.height(2.dp))
 
@@ -291,7 +292,7 @@ fun getCaloriesForDate(date: String): Int {
     return when (date) {
         getDate(-2) -> 420
         getDate(-1) -> 300
-        getDate(0) -> 500
+        getDate(0) -> 501
         else -> 0
     }
 }
@@ -312,5 +313,3 @@ fun getMinForDate(date: String): Int {
         else -> 0
     }
 }
-
-
