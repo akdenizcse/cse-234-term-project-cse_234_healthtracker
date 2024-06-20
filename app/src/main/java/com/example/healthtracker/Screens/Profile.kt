@@ -38,7 +38,8 @@ import java.util.Locale
 fun Profile() {
     var selectedDate by remember { mutableStateOf(getDate(0)) }
     val calories = getCaloriesForDate(selectedDate)
-
+    val kilometers = getKmForDate(selectedDate)
+    val minutes = getMinForDate(selectedDate)
 
     Column(
         modifier = Modifier
@@ -48,11 +49,13 @@ fun Profile() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
+
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
+
         ) {
             IconButton(
                 onClick = { /*TODO*/ }
@@ -63,7 +66,7 @@ fun Profile() {
                     modifier = Modifier
                 )
             }
-            
+
             Spacer(modifier = Modifier.width(45.dp))
 
             Text(
@@ -86,7 +89,7 @@ fun Profile() {
             }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Image(
             painter = painterResource(id = R.drawable.logo),
@@ -95,12 +98,12 @@ fun Profile() {
                 .clip(CircleShape)
                 .size(128.dp)
         )
-        
+
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(text = "Berke Demir", fontSize = 24.sp, color = Color.White, fontWeight = FontWeight.Bold)
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Image(
             painter = painterResource(id = R.drawable.flame),
@@ -109,8 +112,8 @@ fun Profile() {
                 .clip(CircleShape)
                 .size(24.dp)
         )
-        
-        Spacer(modifier = Modifier.height(10.dp))
+
+        Spacer(modifier = Modifier.height(3.dp))
 
         Text(text = "333", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
 
@@ -127,7 +130,7 @@ fun Profile() {
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(36.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -139,7 +142,7 @@ fun Profile() {
                 val textColor = if (i == 3) Color.White else Color.White.copy(alpha = 0.5f)
 
                 TextButton(
-                    onClick = { selectedDate = getDate(-i) },
+                    onClick = { selectedDate = getDate(i-3) },
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 4.dp),
@@ -161,7 +164,6 @@ fun Profile() {
                 .fillMaxWidth()
                 .height(76.dp)
                 .border(2.dp, Color.White.copy(alpha = 0.3f), shape = RoundedCornerShape(48.dp))
-
         )
         {
             Row(
@@ -170,20 +172,22 @@ fun Profile() {
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+
                 Image(
                     painter = painterResource(id = R.drawable.running),
                     contentDescription = "running",
                     modifier = Modifier.clip(CircleShape)
                 )
-                
+
                 Spacer(modifier = Modifier.width(12.dp))
 
                 Column()
                 {
-                    Text(text = "Running", fontSize = 18.sp, color = Color.White)
+                    Text(text = "Running", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = "24 min", fontSize = 14.sp, color = Color.White)
+                    Text(text = "$minutes min", fontSize = 14.sp, color = Color.White, fontWeight = FontWeight.Bold)
                 }
+
                 Spacer(modifier = Modifier.width(56.dp))
 
                 Column(
@@ -192,7 +196,8 @@ fun Profile() {
                     horizontalAlignment = Alignment.End
                 )
                 {
-                    Text(text = "5.56 km", fontSize = 18.sp, color = Color.White)
+                    Text(text = "$kilometers km", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
+
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Row(
@@ -207,7 +212,7 @@ fun Profile() {
                                 .clip(CircleShape)
                                 .size(16.dp)
                         )
-                        Text(text = "300 kcal", fontSize = 14.sp, color = Color.White)
+                        Text(text = "$calories kcal", fontSize = 14.sp, color = Color.White, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -233,16 +238,16 @@ fun Profile() {
                     contentDescription = "Cycling",
                     modifier = Modifier.clip(CircleShape)
                 )
-                
+
                 Spacer(modifier = Modifier.width(12.dp))
 
                 Column()
                 {
-                    Text(text = "Cycling", fontSize = 18.sp, color = Color.White)
+                    Text(text = "Cycling", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = "12 min", fontSize = 14.sp, color = Color.White)
+                    Text(text = "$minutes min", fontSize = 14.sp, color = Color.White, fontWeight = FontWeight.Bold)
                 }
-                
+
                 Spacer(modifier = Modifier.width(56.dp))
 
                 Column(
@@ -251,8 +256,8 @@ fun Profile() {
                     horizontalAlignment = Alignment.End
                 )
                 {
-                    Text(text = "5.56 km", fontSize = 18.sp, color = Color.White)
-                    
+                    Text(text = "$kilometers km", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
+
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Row(
@@ -267,18 +272,11 @@ fun Profile() {
                                 .clip(CircleShape)
                                 .size(16.dp)
                         )
-                        Text(text = "300 kcal", fontSize = 14.sp, color = Color.White)
+                        Text(text = "$calories kcal", fontSize = 14.sp, color = Color.White, fontWeight = FontWeight.Bold)
                     }
                 }
             }
         }
-        
-        Text(
-            text = "Calories: $calories",
-            fontSize = 18.sp,
-            color = Color.White,
-            fontWeight = FontWeight.Bold
-        )
     }
 }
 
@@ -294,8 +292,25 @@ fun getCaloriesForDate(date: String): Int {
         getDate(-2) -> 420
         getDate(-1) -> 300
         getDate(0) -> 500
-        getDate(1) -> 320
-        getDate(2) -> 450
         else -> 0
     }
 }
+
+fun getKmForDate(date: String): Int {
+    return when (date) {
+        getDate(-2) -> 5
+        getDate(-1) -> 6
+        getDate(0) -> 9
+        else -> 0
+    }
+}
+fun getMinForDate(date: String): Int {
+    return when (date) {
+        getDate(-2) -> 12
+        getDate(-1) -> 15
+        getDate(0) -> 32
+        else -> 0
+    }
+}
+
+
