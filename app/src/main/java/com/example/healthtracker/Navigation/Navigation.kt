@@ -6,23 +6,28 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.healthtracker.Screens.HomeScreen
 import com.example.healthtracker.Screens.LogIn
+import com.example.healthtracker.Screens.Profile
 import com.example.healthtracker.Screens.SignUp
 
 @Composable
-fun Nav(){
+fun Nav() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "log_in"){
+    NavHost(navController = navController, startDestination = "log_in") {
 
-        composable(route = "log_in"){
+        composable(route = "log_in") {
             LogIn(navController)
         }
 
-        composable(route = "home_screen"){
+        composable(route = "home_screen") {
             HomeScreen(navController)
         }
 
-        composable(route = "sign_up"){
+        composable(route = "sign_up") {
             SignUp(navController)
+        }
+
+        composable(route = "profile") {
+            Profile(navController)
         }
     }
 }

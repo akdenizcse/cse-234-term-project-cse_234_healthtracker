@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.healthtracker.Navigation.Nav
 import com.example.healthtracker.Screens.HomeScreen
+import com.example.healthtracker.Screens.Profile
 import com.example.healthtracker.ui.theme.Pink40
 import com.example.healthtracker.ui.theme.Pink80
 import com.example.healthtracker.ui.theme.RoyalPurple
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            test()
+            Nav()
         }
     }
 

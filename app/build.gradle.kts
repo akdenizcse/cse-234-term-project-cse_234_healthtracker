@@ -73,7 +73,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.database)
-    implementation(libs.firebase.common.ktx)
+    //implementation(libs.firebase.common.ktx)
 
     // Material3 dependencies
     implementation("androidx.compose.material3:material3-android:1.2.1")

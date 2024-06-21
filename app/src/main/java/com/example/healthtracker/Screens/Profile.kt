@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.healthtracker.R
 import com.example.healthtracker.ui.theme.RoyalPurple
 import java.text.SimpleDateFormat
@@ -35,7 +36,7 @@ import java.util.Locale
 
 
 @Composable
-fun Profile() {
+fun Profile(navController: NavHostController) {
     var selectedDate by remember { mutableStateOf(getDate(0)) }
     val totalCaloriesToday = getCaloriesForDate(getDate(0))
     val calories = getCaloriesForDate(selectedDate)
@@ -59,7 +60,9 @@ fun Profile() {
 
         ) {
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = {
+                    navController.navigate("home_screen")
+                }
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.img),
@@ -84,7 +87,7 @@ fun Profile() {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.img_2),
-                    contentDescription = "close",
+                    contentDescription = "settings",
                     modifier = Modifier
                 )
             }
