@@ -39,3 +39,13 @@ The purpose of this app is to track user's health by displaying calories burned,
 - Fitness enthusiasts wanting to track their health.
 - Anyone interested in an active lifestyle.
 
+
+### Work Distribution
+
+#### @bberkedemir
+
+- Designed User Interfaces including layout and visual elements. Found and integrated necessary logos and images. Implemented Profile Page and Timeline to display data for past week. Added exercise logs and calculations for both Profile Page and Homepage.
+
+#### @ibrahimerrr
+
+- Developed the login functionality and user authentication using email and Google accounts. Implemented Login Page and Homepage to display daily exercise data. Implemented the app's navigation between different screens.
