@@ -106,6 +106,7 @@ fun HomeScreen(navController: NavHostController) {
                 .border(2.dp, Color.White.copy(alpha = 0.3f), shape = RoundedCornerShape(48.dp))
                 .clickable {
                     // navigate exercise
+                    navController.navigate("exercise_screen")
                 }
         )
         {
@@ -233,6 +234,7 @@ fun HomeScreen(navController: NavHostController) {
                 .border(2.dp, Color.White.copy(alpha = 0.3f), shape = RoundedCornerShape(48.dp))
                 .clickable {
                     // navigate exercise
+
                 }
         )
         {

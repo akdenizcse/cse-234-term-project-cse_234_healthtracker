@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.healthtracker.Screens.ExerciseScreen
 import com.example.healthtracker.Screens.HomeScreen
 import com.example.healthtracker.Screens.LogIn
 import com.example.healthtracker.Screens.Profile
@@ -28,6 +29,10 @@ fun Nav() {
 
         composable(route = "profile") {
             Profile(navController)
+        }
+
+        composable(route = "exercise_screen") {
+            ExerciseScreen(navController)
         }
     }
 }
